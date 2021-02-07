@@ -27,6 +27,7 @@ def main_menu():
 
 
 def input_code():
+    """" Loop 5 times and ask for correct inpuf, while the input is not in the colour collection ask for input"""
     colours_list = []
     for i in range(1, 5):
         code_input = ""
@@ -38,9 +39,11 @@ def input_code():
 
 
 def game_kraken():
+    """" While the counter is below 10 ask for input colour and process the guess. Print the amount of colours
+    correct and position correct and reduce de counter by 1"""
     code_list = mf.all_possible_answer()
     secret_code = mf.random_code(code_list)
-    counter = 11
+    counter = 10
     print("Kies uit de volgende kleuren:", *mf.colours)
     while counter > 0:
         print("Nog", counter, "gokken te gaan")

@@ -49,7 +49,7 @@ def guessing_feedback(secret_code, guess_list):
 
 def reduce_code_list(all_possible_list, guess, guess_feedback):
     """Given the list with current possibilities, guess and feedback determine what answers are left.
-     Loop trough the every item in de list and determine if the current item would have created the same feedback as the
+     Loop trough the every item in the list and determine if the current item would have created the same feedback as the
      current feedback. if true add the item to a new list of codes"""
     current_list = []
     for item in all_possible_list:
@@ -60,12 +60,12 @@ def reduce_code_list(all_possible_list, guess, guess_feedback):
 
 def simpel_algorithme(secret):
     """Given the secret code return list with all decisions made by the computer. Create a list of all possible answers.
-    Loop 6 times (The maximum needed to solve the the secret) and create a random guess given the possible answers.
+    Loop 10 times and create a random guess given the possible answers.
     Receive feedback on the guess and add the guess and feedback in a decision list,
     receive a list of possible answers based on the feedback. if the guess equal to the secret return all decisions"""
     all_possible_list = all_possible_answer()
     all_decisions = []
-    for i in range(6):
+    for i in range(10):
         guess = random_code(all_possible_list)
         guess_feedback = guessing_feedback(guess, secret)
         all_decisions.append([guess, guess_feedback])
