@@ -10,6 +10,7 @@ def game_text(num):
 
 
 def main_menu():
+    """" Main menu for the given mastermind game. the input is given with int 0/4"""
     while True:
         print("Mastermind")
         print(game_text(0))
@@ -29,8 +30,10 @@ def main_menu():
 def input_code():
     """" Loop 5 times and ask for correct inpuf, while the input is not in the colour collection ask for input"""
     colours_list = []
+    # Loops 4 tims for the given pin input
     for i in range(1, 5):
         code_input = ""
+        # While the given code is not in colours
         while code_input not in mf.colours:
             code_input = input("Pin {}:".format(i))
         colours_list.append(code_input)
@@ -45,6 +48,7 @@ def game_kraken():
     secret_code = mf.random_code(code_list)
     counter = 10
     print("Kies uit de volgende kleuren:", *mf.colours)
+    # While counter is bigger than zero
     while counter > 0:
         print("Nog", counter, "gokken te gaan")
         counter -= 1
@@ -60,11 +64,14 @@ def game_kraken():
 
 
 def show_simpel_algorithme_results():
+    """" Shows the result of playing against the simple algorithm"""
     print("Kies uit de volgende kleuren:", *mf.colours)
     secret = input_code()
     answers = mf.simpel_algorithme(secret)
     colours_and_pegs = []
+    # For each item in answers
     for item in answers:
+        # Change the returned answers data for the print statements 
         colour_string = ""
         for colour in item[0]:
             colour_string += str(mf.colours[colour]) + " "
