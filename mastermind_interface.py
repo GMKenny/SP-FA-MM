@@ -1,7 +1,8 @@
 import mastermind_functions as mf
+import time
 
 def game_text(num):
-    tekst = ["Kies in de main menu welke opties je wilt met 1, 2, 3, 4", "1: Een code kraken, de computer bedenkt"
+    tekst = ["Kies met 1, 2, 3 en 4 welke opties je wilt", "1: Een code kraken, de computer bedenkt"
               " een code en je moet de code van de computer kraken.\n2: een code bedenken, je vult een secret code "
               "in en de computer gokt met verschillende algoritmes naar het antwoord \n3: Spelregels "
               "\n4: Stoppen\nJe kan uit de volgende kleuren kiezen", [*mf.colours],
@@ -11,6 +12,7 @@ def game_text(num):
 
 def main_menu():
     """" Main menu for the given mastermind game. the input is given with int 0/4"""
+    ui_choice = ["1", "2", "3"]
     while True:
         print("Mastermind")
         print(game_text(0))
@@ -19,10 +21,28 @@ def main_menu():
         if input_game == '1':
             game_kraken()
         elif input_game == "2":
-            show_simpel_algorithme_results()
+            input_game = ""
+            print("Kies 1 voor het Simple algorithm, Kies 2 voor het Knuth algorithm, Kies 3 voor het Beginners bias algorithm:")
+            while input_game not in ui_choice:
+                input_game = str(input("Keuze:"))
+            print("Kies uit de volgende kleuren:", *mf.colours)
+            secret = input_code()
+            if input_game == "1":
+                # Start simpel algorithme
+                answers = mf.simpel_algorithme(secret)
+                show_algorithme_results(answers)
+            if input_game == "2":
+                # Start worst algorithme
+                answers = mf.worst_algorithme(secret)
+                show_algorithme_results(answers)
+            if input_game == "3":
+                # Start human beginners bias algorithme
+                answers = mf.heuristiek_human_beginners_bias(secret)
+                show_algorithme_results(answers)
         elif input_game == "3":
             print(game_text(1))
             print(*game_text(2), sep=" ")
+            time.sleep(5)
         elif input_game == "4":
             break
 
@@ -63,11 +83,8 @@ def game_kraken():
     print("Game over")
 
 
-def show_simpel_algorithme_results():
+def show_algorithme_results(answers):
     """" Shows the result of playing against the simple algorithm"""
-    print("Kies uit de volgende kleuren:", *mf.colours)
-    secret = input_code()
-    answers = mf.simpel_algorithme(secret)
     colours_and_pegs = []
     # For each item in answers
     for item in answers:
@@ -80,6 +97,7 @@ def show_simpel_algorithme_results():
         colours_and_pegs.append(correct_position)
     for item in colours_and_pegs:
         print(item)
+    time.sleep(5)
     return
 
 
